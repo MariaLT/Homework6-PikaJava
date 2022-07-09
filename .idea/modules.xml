@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Homework6-PikaJava.iml" filepath="$PROJECT_DIR$/.idea/Homework6-PikaJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/contOppAcc-proxy-service/contOppAcc-proxy-service.iml" filepath="$PROJECT_DIR$/contOppAcc-proxy-service/contOppAcc-proxy-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-service/eureka-service.iml" filepath="$PROJECT_DIR$/eureka-service/eureka-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lead-proxy-service/lead-proxy-service.iml" filepath="$PROJECT_DIR$/lead-proxy-service/lead-proxy-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/salesRep-edge-service/salesRep-edge-service.iml" filepath="$PROJECT_DIR$/salesRep-edge-service/salesRep-edge-service.iml" />
+    </modules>
+  </component>
+</project>

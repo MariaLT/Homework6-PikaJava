@@ -20,11 +20,13 @@ public class LeadServiceImpl implements LeadService {
     @Override
     public Lead newLead(Lead lead) {
 
-        Lead lead1 = leadRepository. findById(lead.getId()).orElseThrow(()->
-                new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The Lead" +
-                        "already exist"));
+        Optional <Lead> optionalLead = leadRepository. findById(lead.getId());
 
-        return null;
+        if (optionalLead.isPresent()){
+            new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The Lead" +
+                    "already exist");
+        }
+        return lead;
     }
 
     @Override

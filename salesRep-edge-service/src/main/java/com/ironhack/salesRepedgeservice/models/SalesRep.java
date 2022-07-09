@@ -9,11 +9,8 @@ import java.util.List;
 public class SalesRep {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
     private Long id;
     private String name;
-
-    private List <Lead> leadList;
 
     public SalesRep() {
     }
@@ -22,7 +19,7 @@ public class SalesRep {
         this.name = name;
     }
 
-        public Long getId() {
+    public Long getId() {
         return id;
     }
 

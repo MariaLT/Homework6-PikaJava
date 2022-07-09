@@ -19,10 +19,13 @@ public class SalesRepServiceImpl implements SalesRepService {
     @Override
     public SalesRep addSalesRep(SalesRep salesRep) {
 
-        SalesRep salesRep1 = salesRepRepository.findById(salesRep.getId()).orElseThrow(()->
-                new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The Sales Rep" +
-                "already exist"));
-        return salesRep1;
+        Optional <SalesRep> optionalSalesRep = salesRepRepository.findById(salesRep.getId());
+
+        if (optionalSalesRep.isPresent()){
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The Sales Rep" +
+                    "already exist");
+        }
+        return salesRep;
     }
 
     @Override

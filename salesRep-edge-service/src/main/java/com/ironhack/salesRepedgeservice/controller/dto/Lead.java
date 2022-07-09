@@ -67,11 +67,11 @@ public class Lead {
         this.companyName = companyName;
     }
 
-    public Long getSalesRep() {
+    public Long getSalesRepId() {
         return salesRepId;
     }
 
-    public void setSalesRep(Long salesRepId) {
+    public void setSalesRepId(Long salesRepId) {
         this.salesRepId = salesRepId;
     }
 

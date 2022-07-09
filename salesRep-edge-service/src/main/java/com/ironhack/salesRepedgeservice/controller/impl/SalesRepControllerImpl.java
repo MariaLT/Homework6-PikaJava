@@ -27,7 +27,6 @@ public class SalesRepControllerImpl implements SalesRepController {
     @PostMapping("/salesReps")
     @ResponseStatus(HttpStatus.CREATED)
     public SalesRep addSalesRep(@RequestBody SalesRep salesRep) {
-
         return salesRepRepository.save(salesRepService.addSalesRep(salesRep));
     }
 
@@ -38,7 +37,7 @@ public class SalesRepControllerImpl implements SalesRepController {
         return salesRepService.showSalesReps(id);
     }
 
-    @GetMapping("/salesReps/{id}")
+    @GetMapping("/salesReps")
     @ResponseStatus(HttpStatus.OK)
     public List<SalesRep> showAllSalesRep() {
         return salesRepRepository.findAll();

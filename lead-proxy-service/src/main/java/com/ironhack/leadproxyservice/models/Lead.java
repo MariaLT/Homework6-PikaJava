@@ -13,8 +13,6 @@ public class Lead {
     private String email;
     private int phoneNumber;
     private String companyName;
-//    @OneToOne
-//    @JoinColumn(name = "sales_rep_id")
     private Long salesRepId;
 
     public Lead() {
@@ -72,11 +70,11 @@ public class Lead {
         this.companyName = companyName;
     }
 
-    public Long getSalesRep() {
+    public Long getSalesRepId() {
         return salesRepId;
     }
 
-    public void setSalesRep(Long salesRepId) {
+    public void setSalesRepId(Long salesRepId) {
         this.salesRepId = salesRepId;
     }
 

@@ -23,17 +23,17 @@ public class SalesRepServiceImpl implements SalesRepService {
 
         if (optionalSalesRep.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The Sales Rep" +
-                    "already exist");
+                    " already exist");
         }
         return salesRep;
     }
 
     @Override
     public SalesRep showSalesReps(Long id) {
-        Optional<SalesRep> optionalSalesRep = salesRepRepository.findById(id);
-        if (!optionalSalesRep.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Sales Rep isn't exist");
-        }
-        return optionalSalesRep.get();
+        // Si hay un valor presente, devuelve el valor, de lo contrario, lanza NoSuchElementException.
+        SalesRep salesRep = salesRepRepository.findById(id).orElseThrow(()->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "The SalesRep isn't exist"));
+        return salesRepRepository.findById(id).get();
+
     }
 }

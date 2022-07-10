@@ -1,40 +1,42 @@
-package com.ironhack.leadproxyservice.models;
+package com.ironhack.salesRepedgeservice.controller.dto;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "lead_table")
-public class Lead {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Contact {
     private Long id;
     private String name;
     private String email;
     private int phoneNumber;
     private String companyName;
+    private Long accountId;
     private Long salesRepId;
 
-    public Lead() {
+    public Contact() {
     }
 
-    public Lead(String name, String email, int phoneNumber, String companyName) {
+    public Contact(String name, String email, int phoneNumber, String companyName, Long accountId, Long salesRepId) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
+        this.accountId = accountId;
         this.salesRepId = salesRepId;
     }
 
-    public Lead(String name, String email, int phoneNumber, String companyName, Long salesRepId) {
+    public Contact(Long id, String name, String email, int phoneNumber, String companyName, Long accountId, Long salesRepId) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
+        this.accountId = accountId;
         this.salesRepId = salesRepId;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -69,21 +71,19 @@ public class Lead {
         this.companyName = companyName;
     }
 
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
     public Long getSalesRepId() {
         return salesRepId;
     }
 
     public void setSalesRepId(Long salesRepId) {
         this.salesRepId = salesRepId;
-    }
-
-    public String toString() {
-        return String.format(" ***   LEAD    ***\n ID: %s\n Name: %s\n Email: %s\n Phone Number: %s\n Company Name: %s\n --------------------",
-                id,
-                name,
-                email,
-                phoneNumber,
-                companyName);
-
     }
 }

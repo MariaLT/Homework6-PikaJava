@@ -1,6 +1,9 @@
 package com.ironhack.salesRepedgeservice.controller.impl;
 
+import com.ironhack.salesRepedgeservice.client.ContOppAccClient;
 import com.ironhack.salesRepedgeservice.client.LeadClient;
+import com.ironhack.salesRepedgeservice.controller.dto.Account;
+import com.ironhack.salesRepedgeservice.controller.dto.Contact;
 import com.ironhack.salesRepedgeservice.controller.dto.Lead;
 import com.ironhack.salesRepedgeservice.controller.interfaces.SalesRepController;
 import com.ironhack.salesRepedgeservice.models.SalesRep;
@@ -23,6 +26,9 @@ public class SalesRepControllerImpl implements SalesRepController {
 
     @Autowired
     LeadClient leadClient;
+
+    @Autowired
+    ContOppAccClient contOppAccClient;
 
     @PostMapping("/salesReps")
     @ResponseStatus(HttpStatus.CREATED)
@@ -52,4 +58,41 @@ public class SalesRepControllerImpl implements SalesRepController {
         return leadList;
     }
 
+    @PostMapping("/salesReps/convertLead/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    void convertLeadToContactToOpportunity(@PathVariable Long id,
+                                           @RequestBody Account account) {
+
+        Account account1 = contOppAccClient.createAccount(account);
+
+        Lead lead = leadClient.showLead(id);
+
+        Contact contact = new Contact(
+                lead.getId(),
+                lead.getName(),
+                lead.getEmail(),
+                lead.getPhoneNumber(),
+                lead.getCompanyName(),
+                account1.getId(),
+                lead.getSalesRepId()
+        );
+
+
+        contOppAccClient.convertLead(contact);
+        leadClient.deleteLead(id);
+
+    }
+
+    @GetMapping("/salesReps/contact/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Contact contactById(@PathVariable Long id){
+        return contOppAccClient.showContactById(id);
+    }
+
+    @GetMapping("/salesReps/accounts")
+    @ResponseStatus(HttpStatus.OK)
+    public List <Account> accountById(){
+        return contOppAccClient.showAccounts();
+
+    }
 }

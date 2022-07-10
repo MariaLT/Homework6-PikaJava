@@ -1,10 +1,12 @@
-package com.ironhack.leadproxyservice.models;
+package com.ironhack.contOppAccproxyservice.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "lead_table")
-public class Lead {
+public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -12,12 +14,14 @@ public class Lead {
     private String email;
     private int phoneNumber;
     private String companyName;
+
+    private Long accountId;
+
     private Long salesRepId;
-
-    public Lead() {
+    public Contact() {
     }
 
-    public Lead(String name, String email, int phoneNumber, String companyName) {
+    public Contact(String name, String email, int phoneNumber, String companyName, Long salesRep) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -25,16 +29,21 @@ public class Lead {
         this.salesRepId = salesRepId;
     }
 
-    public Lead(String name, String email, int phoneNumber, String companyName, Long salesRepId) {
+    public Contact(String name, String email, int phoneNumber, String companyName, Long salesRepId, Long accountId) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
         this.salesRepId = salesRepId;
+        this.accountId = accountId;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -69,6 +78,14 @@ public class Lead {
         this.companyName = companyName;
     }
 
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
     public Long getSalesRepId() {
         return salesRepId;
     }
@@ -78,12 +95,11 @@ public class Lead {
     }
 
     public String toString() {
-        return String.format(" ***   LEAD    ***\n ID: %s\n Name: %s\n Email: %s\n Phone Number: %s\n Company Name: %s\n --------------------",
+        return String.format(" ***   CONTACT   ***\n ID: %s\n NAME: %s\n EMAIL: %s\n PHONENUMBER: %s\n COMPANYNAME: %s\n --------------------",
                 id,
                 name,
                 email,
                 phoneNumber,
                 companyName);
-
     }
 }

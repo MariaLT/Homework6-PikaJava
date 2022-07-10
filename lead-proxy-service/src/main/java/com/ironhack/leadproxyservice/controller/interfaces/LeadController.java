@@ -13,4 +13,6 @@ public interface LeadController {
 
     List<Lead> showLeadBySalesRep(Long salesRepId);
 
+    void deleteLead(Long id);
+
 }

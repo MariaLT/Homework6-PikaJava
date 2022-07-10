@@ -20,6 +20,9 @@ public interface LeadClient  {
     Lead showLead(@PathVariable Long id);
 
     @GetMapping("/leads/salesRep/{salesRepId}")
-    public List<Lead> showLeadsBySalesRep(@PathVariable Long salesRepId);
+    List<Lead> showLeadsBySalesRep(@PathVariable Long salesRepId);
+
+    @DeleteMapping("/leads/{id}")
+    void deleteLead(@PathVariable Long id);
 
 }

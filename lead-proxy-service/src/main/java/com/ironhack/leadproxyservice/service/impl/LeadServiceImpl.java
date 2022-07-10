@@ -19,11 +19,9 @@ public class LeadServiceImpl implements LeadService {
 
     @Override
     public Lead newLead(Lead lead) {
-
-        Optional <Lead> optionalLead = leadRepository. findById(lead.getId());
-
-        if (optionalLead.isPresent()){
-            new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The Lead" +
+        Optional<Lead> optionalLead = leadRepository.findById(lead.getId());
+        if (optionalLead.isPresent()) {
+            new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The Lead " +
                     "already exist");
         }
         return lead;
@@ -32,20 +30,18 @@ public class LeadServiceImpl implements LeadService {
     @Override
     public Lead showLead(Long id) {
 
-        Optional <Lead> optionalLead = leadRepository.findById(id);
+        Lead lead = leadRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "The Lead isn't exist"));
 
-        if(!optionalLead.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Lead isn't exist");
-        }
-        return optionalLead.get();
+        return leadRepository.findById(id).get();
     }
 
 
     @Override
-    public List<Lead> showLeadBySalesRep(Long salesRepId) {
+    public List<Lead> showLeadBySalesRep(Long salesRepId) throws IllegalArgumentException {
         List<Lead> leadList = leadRepository.findLeadsBySalesRepId(salesRepId);
-        if (leadList==null){
-             throw new IllegalArgumentException("No lead associated to Sales Rep");
+        if (leadList == null || leadList.size() == 0) {
+            throw new IllegalArgumentException("No lead associated to Sales Rep");
         }
         return leadList;
     }

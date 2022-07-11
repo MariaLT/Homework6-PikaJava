@@ -1,38 +1,33 @@
-package com.ironhack.contOppAccproxyservice.model;
+package com.ironhack.salesRepedgeservice.controller.dto;
 
-import com.ironhack.contOppAccproxyservice.enums.Product;
-import com.ironhack.contOppAccproxyservice.enums.Status;
-import org.hibernate.annotations.DynamicUpdate;
+import com.ironhack.salesRepedgeservice.enums.Product;
+import com.ironhack.salesRepedgeservice.enums.Status;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-
-@Entity
-@DynamicUpdate
 public class Opportunity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-    @Enumerated(EnumType.STRING)
     private Product product;
     private int quantity;
     // Contact Id
     private Long decisionMaker;
-    @Enumerated(EnumType.STRING)
     private Status status;
-
     private Long accountId;
-
     private Long salesRepId;
 
     public Opportunity() {
     }
 
-    public Opportunity(Product product, int quantity, Long decisionMaker, Status status, Long salesRepId) {
+    public Opportunity(Long id, Product product, int quantity, Long decisionMaker, Status status,
+                       Long accountId, Long salesRepId) {
+        this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.decisionMaker = decisionMaker;
         this.status = status;
+        this.accountId = accountId;
         this.salesRepId = salesRepId;
     }
 
@@ -99,16 +94,5 @@ public class Opportunity {
 
     public void setSalesRepId(Long salesRepId) {
         this.salesRepId = salesRepId;
-    }
-
-    public String toString() {
-        return String.format(" ***   OPPORTUNITY   ***\n ID: %s\n PRODUCT: %s\n QUANTITY: %s\n DECISIONMAKER: {\n%s\n}\n STATUS: %s\n--------------------",
-                id,
-                product,
-                quantity,
-                decisionMaker,
-                status);
-
-
     }
 }

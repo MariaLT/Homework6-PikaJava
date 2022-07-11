@@ -8,28 +8,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
 
 @Service
 public class ContactServiceImpl implements ContactService {
 
     @Autowired
-    ContactRepository contactRepository;
+    private ContactRepository contactRepository;
 
-
-    @Override
-    public Contact convertLead(Contact contact) {
-        Optional <Contact> optionalContact = contactRepository.findById(contact.getId());
-        if(optionalContact.isPresent()){
-            new ResponseStatusException(HttpStatus.ACCEPTED, "The contacts already exist");
-        }
-        return contact;
-    }
 
     @Override
     public Contact showContactById(Long id) {
         Contact contact = contactRepository.findById(id).orElseThrow(()->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "The contacts isn't exist"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "The contacts don't exist"));
         return contact;
     }
 }

@@ -16,6 +16,13 @@ public class Account {
     public Account() {
     }
 
+    public Account(int employeeCount, Industry industry, String city, String country) {
+        this.employeeCount = employeeCount;
+        this.industry = industry;
+        this.city = city;
+        this.country = country;
+    }
+
     public Account(Long id, int employeeCount, Industry industry, String city, String country) {
         this.id = id;
         this.employeeCount = employeeCount;

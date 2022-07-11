@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface LeadService {
 
-    Lead newLead(Lead lead);
-
     Lead showLead(Long id);
 
     List<Lead> showLeadBySalesRep(Long salesRepId);
+
+    void deleteLead(Long id);
 }

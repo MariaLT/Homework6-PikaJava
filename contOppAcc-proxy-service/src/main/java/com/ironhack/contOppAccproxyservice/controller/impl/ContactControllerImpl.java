@@ -15,16 +15,16 @@ import javax.validation.Valid;
 public class ContactControllerImpl implements ContactController {
 
     @Autowired
-    ContactRepository contactRepository;
+    private ContactRepository contactRepository;
 
     @Autowired
-    ContactService contactService;
+    private ContactService contactService;
 
     @PostMapping("/contacts")
     @ResponseStatus(HttpStatus.CREATED)
     // O RequieredParam
     public Contact convertLead(@RequestBody Contact contact){
-        return contactRepository.save(contactService.convertLead(contact));
+        return contactRepository.save(contact);
     }
 
     @GetMapping("/contacts/{id}")

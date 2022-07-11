@@ -15,17 +15,17 @@ public class AccountControllerImpl implements AccountController {
 
 
     @Autowired
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
-    AccountService accountService;
+    private AccountService accountService;
 
 
     @PostMapping("/accounts")
     @ResponseStatus(HttpStatus.CREATED)
     public Account createAccount(@RequestBody Account account) {
 
-        return accountRepository.save(accountService.createAccount(account));
+        return accountRepository.save(account);
     }
 
     @GetMapping("/accounts")

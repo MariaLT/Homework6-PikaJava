@@ -1,5 +1,11 @@
 package com.ironhack.salesRepedgeservice.service.impl;
 
+import com.ironhack.salesRepedgeservice.client.ContOppAccClient;
+import com.ironhack.salesRepedgeservice.client.LeadClient;
+import com.ironhack.salesRepedgeservice.controller.dto.*;
+import com.ironhack.salesRepedgeservice.enums.Industry;
+import com.ironhack.salesRepedgeservice.enums.Product;
+import com.ironhack.salesRepedgeservice.enums.Status;
 import com.ironhack.salesRepedgeservice.models.SalesRep;
 import com.ironhack.salesRepedgeservice.repository.SalesRepRepository;
 import com.ironhack.salesRepedgeservice.service.interfaces.SalesRepService;
@@ -15,18 +21,11 @@ public class SalesRepServiceImpl implements SalesRepService {
 
     @Autowired
     SalesRepRepository salesRepRepository;
+    @Autowired
+    ContOppAccClient contOppAccClient;
+    @Autowired
+    LeadClient leadClient;
 
-    @Override
-    public SalesRep addSalesRep(SalesRep salesRep) {
-
-        Optional <SalesRep> optionalSalesRep = salesRepRepository.findById(salesRep.getId());
-
-        if (optionalSalesRep.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The Sales Rep" +
-                    " already exist");
-        }
-        return salesRep;
-    }
 
     @Override
     public SalesRep showSalesReps(Long id) {
@@ -35,5 +34,42 @@ public class SalesRepServiceImpl implements SalesRepService {
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "The SalesRep isn't exist"));
         return salesRepRepository.findById(id).get();
 
+    }
+
+    @Override
+    public void convertLeadToContactToOpportunity(Long id, ContOppAccDTO contOppAccDTO) {
+        Account account = new Account(
+                contOppAccDTO.getEmployeeCount(),
+                Industry.valueOf(contOppAccDTO.getIndustry().toUpperCase()),
+                contOppAccDTO.getCity(),
+                contOppAccDTO.getCountry()
+        );
+
+        Account account1 = contOppAccClient.createAccount(account);
+
+        Lead lead = leadClient.showLead(id);
+
+        Contact contact = new Contact(
+                lead.getName(),
+                lead.getEmail(),
+                lead.getPhoneNumber(),
+                lead.getCompanyName(),
+                account1.getId(),
+                lead.getSalesRepId()
+        );
+
+        Contact contact1 = contOppAccClient.convertLead(contact);
+
+        Opportunity opportunity = new Opportunity(
+                Product.valueOf(contOppAccDTO.getProduct().toUpperCase()),
+                contOppAccDTO.getQuantity(),
+                contact1.getId(),
+                Status.valueOf(contOppAccDTO.getStatus().toUpperCase()),
+                account1.getId(),
+                lead.getSalesRepId());
+
+        contOppAccClient.convertToOpportunity(opportunity);
+
+        leadClient.deleteLead(id);
     }
 }

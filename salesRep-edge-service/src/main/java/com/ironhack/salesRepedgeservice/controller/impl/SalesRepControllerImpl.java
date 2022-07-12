@@ -75,7 +75,7 @@ public class SalesRepControllerImpl implements SalesRepController {
 
     @GetMapping("/salesReps/accounts")
     @ResponseStatus(HttpStatus.OK)
-    public List<Account> accountById() {
+    public List<Account> accounts() {
         return contOppAccClient.showAccounts();
 
     }
@@ -88,7 +88,7 @@ public class SalesRepControllerImpl implements SalesRepController {
 
     @GetMapping("/salesReps/opportunities")
     @ResponseStatus(HttpStatus.OK)
-    List<Opportunity> showsOpportunities() {
+    public List<Opportunity> showsOpportunities() {
         List<Opportunity> opportunityList = contOppAccClient.showsOpportunities();
         return opportunityList;
     }

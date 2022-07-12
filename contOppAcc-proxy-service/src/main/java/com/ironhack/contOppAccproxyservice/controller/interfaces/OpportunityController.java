@@ -5,10 +5,14 @@ import com.ironhack.contOppAccproxyservice.model.Opportunity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 public interface OpportunityController {
 
     Opportunity convertToOpportunity(Opportunity opportunity);
 
     Opportunity updateStatus(Long id, StatusDTO statusDTO);
+
+    List<Opportunity> showsOpportunities();
 
 }

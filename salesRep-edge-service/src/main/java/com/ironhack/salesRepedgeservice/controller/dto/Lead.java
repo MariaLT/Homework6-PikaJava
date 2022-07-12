@@ -23,6 +23,15 @@ public class Lead {
         this.salesRepId = salesRepId;
     }
 
+    public Lead(Long id, String name, String email, int phoneNumber, String companyName, Long salesRepId) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.companyName = companyName;
+        this.salesRepId = salesRepId;
+    }
+
     public Lead(String name, String email, int phoneNumber, String companyName, Long salesRepId) {
         this.name = name;
         this.email = email;

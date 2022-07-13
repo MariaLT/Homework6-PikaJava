@@ -10,9 +10,11 @@
         <module name="lead-proxy-service" />
         <module name="contOppAcc-proxy-service" />
         <module name="salesRep-edge-service" />
+        <module name="config-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="config-service" target="17" />
       <module name="contOppAcc-proxy-service" target="17" />
       <module name="eureka-service" target="17" />
       <module name="lead-proxy-service" target="17" />
@@ -21,6 +23,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="config-service" options="-parameters" />
       <module name="contOppAcc-proxy-service" options="-parameters" />
       <module name="eureka-service" options="-parameters" />
       <module name="lead-proxy-service" options="-parameters" />

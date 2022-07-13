@@ -39,6 +39,8 @@ De todas formas, puedes probar a introducir nuevos datos, si así lo deseas.
 
 Para usar este documento solo tienes que importarlo a tu Postman. 
 
+Debido a que hemos realizado externalización, te adjuntamos aquí el enlace a nuestro repositorio público donde encontrarás las properties: https://github.com/Pikajava/config-repo.git
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ### Datos adicionales que nos gustaría que conocieras: 
 

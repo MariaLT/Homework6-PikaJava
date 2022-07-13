@@ -36,7 +36,7 @@ public class SalesRepServiceImpl implements SalesRepService {
         return salesRepRepository.findById(id).get();
 
     }
-    @CircuitBreaker(name="convertLeadToContactToOpportunity", fallbackMethod = "convertLeadToContactToOpportunityFallback")
+  //  @CircuitBreaker(name="convertLeadToContactToOpportunity", fallbackMethod = "convertLeadToContactToOpportunityFallback")
     @Override
     public void convertLeadToContactToOpportunity(Long id, ContOppAccDTO contOppAccDTO) {
         Account account = new Account(

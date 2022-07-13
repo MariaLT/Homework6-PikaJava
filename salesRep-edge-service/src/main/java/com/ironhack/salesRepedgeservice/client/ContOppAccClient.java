@@ -23,6 +23,9 @@ public interface ContOppAccClient {
     @GetMapping("/accounts")
     List<Account> showAccounts();
 
+    @GetMapping("/accounts/{id}")
+    Account showAccountById(@PathVariable Long id);
+
     @GetMapping("/contacts/{id}")
     Contact showContactById (@PathVariable Long id);
 

@@ -23,10 +23,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -149,22 +149,20 @@ class SalesRepControllerImplTest {
 
     }
 
-
+/*
     @Test
     void convertLeadToContactToOpportunity() throws Exception {
-        /*
-         account1 = new Account(6, Industry.OTHER, "City1", "Country1");
-        contact1 = new Contact("Contact1", "contact1@hotmail.com", 234567890, "CompanyName", account1.getId(), 1l);
-        opportunity1 = new Opportunity(Product.BOX, 5, contact1.getId(), Status.OPEN, account1.getId(), 1l);
-         */
+
 
         ContOppAccDTO contOppAccDTO = new ContOppAccDTO(6, "OTHER", "City1", "Country1", "BOX", 5, "OPEN");
+
+ //       account1.setId(1l);
 
         Contact contact = contact1;
         contact.setId(1l);
 
-        Account account = account1;
-        account.setId(1l);
+ //       Account account = account1;
+ //       account.setId(1l);
 
         Opportunity opportunity = opportunity1;
         opportunity.setId(1l);
@@ -173,10 +171,9 @@ class SalesRepControllerImplTest {
         Mockito.when(contOppAccClient.showContactById(contact1.getId())).thenReturn(contact1);
         Mockito.when(contOppAccClient.convertLead(contact1)).thenReturn(contact);
 
-        //Crear showAccountById en Account (!!!!!!!!!!!!!!!!!!!!!!!!)
 
-//        Mockito.when(contOppAccClient.showAccounttById(account1.getId())).thenReturn(account1);
-        Mockito.when(contOppAccClient.createAccount(account1)).thenReturn(account);
+//        Mockito.when(contOppAccClient.showAccountById(account1.getId())).thenReturn(account1);
+//        Mockito.when(contOppAccClient.createAccount(account1)).thenReturn(account1);
         Mockito.when(contOppAccClient.convertToOpportunity(opportunity1)).thenReturn(opportunity);
 
 
@@ -190,30 +187,95 @@ class SalesRepControllerImplTest {
                 .andExpect(status().isCreated())
                 .andReturn();
 
-        assertTrue(mvcResult.getResponse().getContentAsString().contains(account1.getCity()));
+        Optional<Contact> optionalContact = Optional.ofNullable(contOppAccClient.showContactById(contact1.getId()));
+
+        assertEquals(contact1.getId(), optionalContact.get().getId());
+     //   assertTrue(mvcResult.getResponse().getContentAsString().contains(contact1.getEmail()));
+     //   assertTrue(mvcResult.getResponse().getContentAsString().contains(opportunity1.getStatus().toString()));
+
+
+    }
+*/
+
+
+    @Test
+    void contactById() throws Exception {
+        contact1.setId(1l);
+        Mockito.when(contOppAccClient.showContactById(contact1.getId())).thenReturn(contact1);
+        MvcResult mvcResult = mockMvc.perform(
+                        get("/salesReps/contact/" + contact1.getId())
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andReturn();
+
         assertTrue(mvcResult.getResponse().getContentAsString().contains(contact1.getEmail()));
+    }
+
+    @Test
+    void accounts() throws Exception {
+        Mockito.when(contOppAccClient.showAccounts()).thenReturn(List.of(account1));
+
+        MvcResult mvcResult = mockMvc.perform(
+                        get("/salesReps/accounts")
+
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+
+        assertTrue(mvcResult.getResponse().getContentAsString().contains(account1.getCountry()));
+        assertTrue(mvcResult.getResponse().getContentAsString().contains(account1.getCity()));
+
+
+    }
+
+    @Test
+    void updateStatus() throws Exception {
+
+        opportunity1.setId(1l);
+
+        Opportunity opportunity =  new Opportunity(Product.BOX, 5, contact1.getId(), Status.CLOSED_WON, account1.getId(), 1l);
+        opportunity.setId(1l);
+
+        StatusDTO statusDTO = new StatusDTO(Status.CLOSED_WON);
+        String body = objectMapper.writeValueAsString(statusDTO);
+
+        Mockito.when(contOppAccClient.updateStatus(opportunity1.getId(), statusDTO)).thenReturn(opportunity);
+
+        MvcResult mvcResult = mockMvc.perform(
+                        patch("/salesReps/opportunities/" + opportunity1.getId() + "/status")
+                                .content(body)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+        assertFalse(mvcResult.getResponse().getContentAsString().contains(opportunity.getStatus().toString()));
+
+    }
+
+    @Test
+    void showsOpportunities() throws Exception {
+        Mockito.when(contOppAccClient.showsOpportunities()).thenReturn(List.of(opportunity1));
+
+        MvcResult mvcResult = mockMvc.perform(
+                        get("/salesReps/opportunities")
+
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+
         assertTrue(mvcResult.getResponse().getContentAsString().contains(opportunity1.getStatus().toString()));
+        assertTrue(mvcResult.getResponse().getContentAsString().contains(opportunity1.getProduct().toString()));
 
 
     }
 
-/*
-    @Test
-    void contactById() {
-    }
 
-    @Test
-    void accounts() {
-
-    @Test
-    void updateStatus() {
-    }
-
-    @Test
-    void showsOpportunities() {
-    }
-
- */
 
 
 }

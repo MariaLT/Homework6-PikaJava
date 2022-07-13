@@ -87,6 +87,21 @@ class AccountControllerImplTest {
     }
 
 
+    @Test
+    void showAccountById() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(
+                        get("/accounts/" + account1.getId())
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertTrue(mvcResult.getResponse().getContentAsString().contains(account1.getId().toString()));
+        assertTrue(mvcResult.getResponse().getContentAsString().contains(account1.getIndustry().toString()));
+
+    }
+
+
 
 
 }

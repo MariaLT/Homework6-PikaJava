@@ -8,5 +8,6 @@ public interface AccountService {
 
     List<Account> showAccounts();
 
+    Account showAccountById(Long id);
 }
 

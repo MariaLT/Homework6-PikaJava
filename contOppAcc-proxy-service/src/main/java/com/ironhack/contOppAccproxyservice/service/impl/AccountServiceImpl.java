@@ -1,6 +1,7 @@
 package com.ironhack.contOppAccproxyservice.service.impl;
 
 import com.ironhack.contOppAccproxyservice.model.Account;
+import com.ironhack.contOppAccproxyservice.model.Contact;
 import com.ironhack.contOppAccproxyservice.repository.AccountRepository;
 import com.ironhack.contOppAccproxyservice.service.interfaces.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,12 @@ public class AccountServiceImpl implements AccountService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No accounts find");
         }
         return accountList;
+    }
+
+    @Override
+    public Account showAccountById(Long id) {
+        Account account = accountRepository.findById(id).orElseThrow(()->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "The accounts don't exist"));
+        return account;
     }
 }

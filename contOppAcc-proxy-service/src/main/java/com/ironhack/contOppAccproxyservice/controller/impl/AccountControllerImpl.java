@@ -2,6 +2,7 @@ package com.ironhack.contOppAccproxyservice.controller.impl;
 
 import com.ironhack.contOppAccproxyservice.controller.interfaces.AccountController;
 import com.ironhack.contOppAccproxyservice.model.Account;
+import com.ironhack.contOppAccproxyservice.model.Contact;
 import com.ironhack.contOppAccproxyservice.repository.AccountRepository;
 import com.ironhack.contOppAccproxyservice.service.interfaces.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +35,11 @@ public class AccountControllerImpl implements AccountController {
 
         return accountService.showAccounts();
     }
+
+    @GetMapping("/accounts/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Account showAccountById(@PathVariable Long id){
+        return accountService.showAccountById(id);
+    }
+
 }

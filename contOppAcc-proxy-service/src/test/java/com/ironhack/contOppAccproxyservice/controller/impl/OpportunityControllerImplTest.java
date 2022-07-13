@@ -1,6 +1,7 @@
 package com.ironhack.contOppAccproxyservice.controller.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ironhack.contOppAccproxyservice.controller.dto.StatusDTO;
 import com.ironhack.contOppAccproxyservice.enums.Industry;
 import com.ironhack.contOppAccproxyservice.enums.Product;
 import com.ironhack.contOppAccproxyservice.enums.Status;
@@ -20,10 +21,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -93,10 +98,41 @@ class OpportunityControllerImplTest {
     }
 
     @Test
-    void updateStatus() {
+
+    // COMPROBAR
+
+    void updateStatus() throws Exception {
+
+        StatusDTO statusDTO = new StatusDTO(Status.CLOSED_WON);
+
+        String body = objectMapper.writeValueAsString(statusDTO);
+
+        MvcResult mvcResult = mockMvc.perform(
+                        patch("/opportunities/" + opportunity1.getId() + "/status")
+                                .content(body)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+        Optional<Opportunity> optionalOpportunity = opportunityRepository.findById(opportunity1.getId());
+        assertTrue(optionalOpportunity.isPresent());
+        assertEquals(statusDTO.getStatus(), optionalOpportunity.get().getStatus());
+
     }
 
     @Test
-    void showsOpportunities() {
+    void showsOpportunities() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(
+                        get("/oportunities")
+
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        // SalesRep1
+        assertTrue(mvcResult.getResponse().getContentAsString().contains(opportunity1.getId().toString()));
+        assertTrue(mvcResult.getResponse().getContentAsString().contains(opportunity2.getProduct().toString()));
     }
 }

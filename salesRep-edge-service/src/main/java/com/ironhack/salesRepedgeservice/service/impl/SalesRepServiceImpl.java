@@ -9,6 +9,7 @@ import com.ironhack.salesRepedgeservice.enums.Status;
 import com.ironhack.salesRepedgeservice.models.SalesRep;
 import com.ironhack.salesRepedgeservice.repository.SalesRepRepository;
 import com.ironhack.salesRepedgeservice.service.interfaces.SalesRepService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class SalesRepServiceImpl implements SalesRepService {
         return salesRepRepository.findById(id).get();
 
     }
-
+    @CircuitBreaker(name="convertLeadToContactToOpportunity", fallbackMethod = "convertLeadToContactToOpportunityFallback")
     @Override
     public void convertLeadToContactToOpportunity(Long id, ContOppAccDTO contOppAccDTO) {
         Account account = new Account(
@@ -71,5 +72,8 @@ public class SalesRepServiceImpl implements SalesRepService {
         contOppAccClient.convertToOpportunity(opportunity);
 
         leadClient.deleteLead(id);
+    }
+    public void convertLeadToContactToOpportunityFallback(Long id, ContOppAccDTO contOppAccDTO,Exception e){
+        throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Service unavailable");
     }
 }

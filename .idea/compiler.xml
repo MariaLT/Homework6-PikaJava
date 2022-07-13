@@ -8,8 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-service" />
         <module name="lead-proxy-service" />
-        <module name="salesRep-edge-service" />
         <module name="contOppAcc-proxy-service" />
+        <module name="salesRep-edge-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

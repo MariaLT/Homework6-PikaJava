@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "f0ebc22c-3c64-49f2-a256-50fa42972610",
+		"name": "Homework6 Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21551064"
+	},
+	"item": [
+		{
+			"name": "createSalesRep",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"SalesDos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/salesReps"
+			},
+			"response": []
+		},
+		{
+			"name": "getSalesRep",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 30,\r\n\"name\":\"SalesDos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/salesReps"
+			},
+			"response": []
+		},
+		{
+			"name": "createLead",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":0,\r\n    \"name\": \"LeadNombre\",\r\n    \"email\" :\"lead@lead.com\",\r\n    \"phoneNumber\": 95216548,\r\n    \"companyName\": \"company\",\r\n    \"salesRepId\": 2\r\n    }\r\n\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/leads"
+			},
+			"response": []
+		},
+		{
+			"name": "showLeadById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":0,\r\n    \"name\": \"LeadNombre\",\r\n    \"email\" :\"lead@lead.com\",\r\n    \"phoneNumber\": 95216548,\r\n    \"companyName\": \"company\",\r\n    \"salesRepId\": 2\r\n    }\r\n\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/leads/5"
+			},
+			"response": []
+		},
+		{
+			"name": "showLeadBySalesRepId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":0,\r\n    \"name\": \"LeadNombre\",\r\n    \"email\" :\"lead@lead.com\",\r\n    \"phoneNumber\": 95216548,\r\n    \"companyName\": \"company\",\r\n    \"salesRepId\": 2\r\n    }\r\n\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/leads/salesRep/2"
+			},
+			"response": []
+		},
+		{
+			"name": "showLeadBySalesRepIdDesdel8080",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":0,\r\n    \"name\": \"LeadNombre\",\r\n    \"email\" :\"lead@lead.com\",\r\n    \"phoneNumber\": 95216548,\r\n    \"companyName\": \"company\",\r\n    \"salesRepId\": 2\r\n    }\r\n\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/salesRep/2/leads"
+			},
+			"response": []
+		},
+		{
+			"name": "getSalesRepByID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 30,\r\n\"name\":\"SalesDos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/salesReps/8"
+			},
+			"response": []
+		},
+		{
+			"name": "convertLeadToContactAndOpportunity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":2,\r\n    \"employeeCount\":4,\r\n    \"industry\": \"PRODUCE\",\r\n    \"city\": \"Madrid\",\r\n    \"country\": \"España\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/salesReps/convertLead/4"
+			},
+			"response": []
+		},
+		{
+			"name": "get Contact",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":25,\r\n    \"employeeCount\":4,\r\n    \"industry\": \"PRODUCE\",\r\n    \"city\": \"Madrid\",\r\n    \"country\": \"España\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/salesReps/contact/2"
+			},
+			"response": []
+		},
+		{
+			"name": "showAccounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8082/accounts"
+			},
+			"response": []
+		},
+		{
+			"name": "createSalesRepDos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"SalesDos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/salesReps"
+			},
+			"response": []
+		},
+		{
+			"name": "showOpportunities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/salesReps/opportunities"
+			},
+			"response": []
+		}
+	]
+}

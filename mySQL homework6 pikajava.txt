@@ -1,0 +1,15 @@
+GRANT ALL PRIVILEGES ON homework.* TO 'homework'@'127.0.0.1';
+GRANT ALL PRIVILEGES ON homework6_salesRep.* TO 'homework'@'127.0.0.1';
+GRANT ALL PRIVILEGES ON homework6_lead.* TO 'homework'@'127.0.0.1';
+GRANT ALL PRIVILEGES ON homework6_contOppAcc.* TO 'homework'@'127.0.0.1';
+GRANT ALL PRIVILEGES ON homework6_salesRep_test.* TO 'homework'@'127.0.0.1';
+GRANT ALL PRIVILEGES ON homework6_lead_test.* TO 'homework'@'127.0.0.1';
+GRANT ALL PRIVILEGES ON homework6_contOppAcc_test.* TO 'homework'@'127.0.0.1';
+
+
+CREATE SCHEMA homework6_salesRep;
+CREATE SCHEMA homework6_contOppAcc;
+CREATE SCHEMA homework6_lead;
+CREATE SCHEMA homework6_salesRep_test;
+CREATE SCHEMA homework6_contOppAcc_test;
+CREATE SCHEMA homework6_lead_test;

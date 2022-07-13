@@ -19,7 +19,9 @@ En este proyecto hemos utilizado el homework3 de referencia para convertir dicho
 ### ¿Cómo está conformado el proyecto?
 
 Contamos con 2 proxys `lead-proxy-service` y `contOppAcc-proxy-service` y, con un edge `salesRep-edge-service`.
-También contamos con `eureka-service` que nos permite registrar los servicios en el puerto 8761 y con un  `config-service` para la externalización y poder tener mayor escalabilidad.
+
+Además, contamos con `eureka-service` que nos permite registrar los servicios en el puerto 8761 y con un  `config-service` para la externalización y poder tener mayor escalabilidad.
+
 También hemos realizado test de todas las peticiones de los diferentes proyectos que podrás encontrar en la carpeta de test respectiva de cada uno. 
 Hemos realizado también Circuit Braker para que nuestra aplicación pueda funcionar de una forma más eficiente. 
 
@@ -28,10 +30,13 @@ Hemos realizado también Circuit Braker para que nuestra aplicación pueda funci
 ### ¿Cómo usarlo? 
 
 Para que  funcione correctamente, tendrás que levantar las terminales de cada proyecto. 
-Encontrarás en este proyecto un documento `mySQL` donde encontrarás las contraseñas que tienes que usar así como los nombres de los esquemas de la base de datos. 
+
+Encontrarás en este proyecto un documento `mySQL homework6 pikajava` donde encontrarás las contraseñas que tienes que usar así como los nombres de los esquemas de la base de datos. 
 Te recomendamos que te crees una connection titulada homework con contraseña homework. 
+
 También adjuntamos un documento ` Homework6.postman_collection.json ` donde encontrarás todas las peticiones que puedes hacer con el proyecto en Postman, para ahorrarte tiempo, ya que hemos incluido hasta los bodys necesarios. 
 De todas formas, puedes probar a introducir nuevos datos, si así lo deseas. 
+
 Para usar este documento solo tienes que importarlo a tu Postman. 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------

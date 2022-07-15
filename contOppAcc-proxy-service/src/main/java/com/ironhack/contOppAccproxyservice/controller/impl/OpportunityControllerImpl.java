@@ -2,9 +2,6 @@ package com.ironhack.contOppAccproxyservice.controller.impl;
 
 import com.ironhack.contOppAccproxyservice.controller.dto.StatusDTO;
 import com.ironhack.contOppAccproxyservice.controller.interfaces.OpportunityController;
-import com.ironhack.contOppAccproxyservice.enums.Product;
-import com.ironhack.contOppAccproxyservice.enums.Status;
-import com.ironhack.contOppAccproxyservice.model.Contact;
 import com.ironhack.contOppAccproxyservice.model.Opportunity;
 import com.ironhack.contOppAccproxyservice.repository.ContactRepository;
 import com.ironhack.contOppAccproxyservice.repository.OpportunityRepository;
@@ -12,9 +9,8 @@ import com.ironhack.contOppAccproxyservice.service.interfaces.OpportunityService
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class OpportunityControllerImpl implements OpportunityController {
@@ -44,4 +40,6 @@ public class OpportunityControllerImpl implements OpportunityController {
     public List <Opportunity> showsOpportunities(){
         return opportunityService.showsOpportunities();
     }
+
+
 }

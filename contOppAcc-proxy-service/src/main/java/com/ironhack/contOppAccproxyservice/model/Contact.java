@@ -18,6 +18,7 @@ public class Contact {
     private Long accountId;
 
     private Long salesRepId;
+
     public Contact() {
     }
 

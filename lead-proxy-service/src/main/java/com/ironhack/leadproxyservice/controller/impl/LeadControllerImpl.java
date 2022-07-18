@@ -12,10 +12,8 @@ import java.util.List;
 
 @RestController
 public class LeadControllerImpl implements LeadController {
-
     @Autowired
     private LeadRepository leadRepository;
-
     @Autowired
     private LeadService leadService;
 
@@ -24,20 +22,17 @@ public class LeadControllerImpl implements LeadController {
     public Lead newLead(@RequestBody Lead lead) {
         return leadRepository.save(lead);
     }
-
     @GetMapping("/leads/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Lead showLead(@PathVariable Long id) {
         return leadService.showLead(id);
     }
-
     @GetMapping("/leads/salesRep/{salesRepId}")
     @ResponseStatus(HttpStatus.OK)
     public List<Lead> showLeadBySalesRep(@PathVariable Long salesRepId){
         return leadService.showLeadBySalesRep(salesRepId);
                 //leadRepository.findLeadsBySalesRepId(salesRepId);
     }
-
     @DeleteMapping("/leads/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteLead(@PathVariable Long id){

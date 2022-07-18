@@ -27,14 +27,12 @@ public class OpportunityControllerImpl implements OpportunityController {
         opportunityService.checkContact(opportunity);
         return opportunityRepository.save(opportunity);
     }
-
     @PatchMapping("/opportunities/{id}/status")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Opportunity updateStatus(@PathVariable Long id,
                                     @RequestBody StatusDTO statusDTO){
         return opportunityRepository.save(opportunityService.updateStatus(id, statusDTO.getStatus()));
     }
-
     @GetMapping("/opportunities")
     @ResponseStatus(HttpStatus.OK)
     public List <Opportunity> showsOpportunities(){

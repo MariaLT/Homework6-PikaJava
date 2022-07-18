@@ -3,7 +3,6 @@ package com.ironhack.contOppAccproxyservice.controller.dto;
 import com.ironhack.contOppAccproxyservice.enums.Status;
 
 public class StatusDTO {
-
     private Status status;
 
     public StatusDTO() {

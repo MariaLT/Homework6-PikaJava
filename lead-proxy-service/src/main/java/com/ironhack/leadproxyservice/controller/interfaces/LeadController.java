@@ -8,11 +8,8 @@ import java.util.List;
 public interface LeadController {
 
     Lead newLead(Lead lead);
-
     Lead showLead(Long id);
-
     List<Lead> showLeadBySalesRep(Long salesRepId);
-
     void deleteLead(Long id);
 
 }

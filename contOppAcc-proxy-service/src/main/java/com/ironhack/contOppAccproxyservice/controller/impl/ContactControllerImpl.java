@@ -13,10 +13,8 @@ import javax.validation.Valid;
 
 @RestController
 public class ContactControllerImpl implements ContactController {
-
     @Autowired
     private ContactRepository contactRepository;
-
     @Autowired
     private ContactService contactService;
 
@@ -26,7 +24,6 @@ public class ContactControllerImpl implements ContactController {
     public Contact convertLead(@RequestBody Contact contact){
         return contactRepository.save(contact);
     }
-
     @GetMapping("/contacts/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Contact showContactById(@PathVariable Long id){

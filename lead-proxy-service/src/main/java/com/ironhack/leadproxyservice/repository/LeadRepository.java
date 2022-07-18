@@ -9,11 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface LeadRepository extends JpaRepository <Lead, Long> {
-
     List<Lead> findLeadsBySalesRepId(Long id);
-
-
-
-
 
 }
